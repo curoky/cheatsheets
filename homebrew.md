@@ -49,6 +49,17 @@ category: CLI
 
 Cask commands are used for interacting with graphical applications.
 
+### Tap
+
+Create new tap
+
+- [How-to-Create-and-Maintain-a-Tap](https://docs.brew.sh/How-to-Create-and-Maintain-a-Tap)
+- [release-your-own-app-in-Homebrew](https://liam.page/2016/07/30/release-your-own-app-in-Homebrew/)
+
+```bash
+brew tap-new tom/tap
+```
+
 ## Also see
 {: .-one-column}
 

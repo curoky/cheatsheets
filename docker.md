@@ -183,6 +183,24 @@ docker volume prune
 
 Delete all the volumes
 
+## Others
+
+### Proxy
+
+Add follow lines to `/etc/systemd/system/docker.service.d/https-proxy.conf`
+
+```bash
+[Service]
+Environment=HTTP_PROXY=http://xxx.xxx.xxx.xxx:xxx/
+```
+
+Then
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
 Also see
 --------
 

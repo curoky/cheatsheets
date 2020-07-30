@@ -273,6 +273,15 @@ for i in {5..50..5}; do
 done
 ```
 
+### Loop on list
+
+```bash
+for i in 1 2 3 4 5
+do
+    echo "Looping ... number $i"
+done
+```
+
 ### Reading lines
 
 ```bash
