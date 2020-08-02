@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 set -xeuo pipefail
 
-# install
 # yarn install
 # bundle install
 

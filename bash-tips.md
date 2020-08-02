@@ -25,8 +25,8 @@ remove special path
 
 ```bash
 function PATH_REMOVE() {
-    local DIR=$1
-    export PATH=$(echo -n $PATH | awk -v RS=: -v ORS=: '$0 != "'$DIR'"' | sed 's/:$//')
+  local DIR=$1
+  export PATH=$(echo -n $PATH | awk -v RS=: -v ORS=: '$0 != "'$DIR'"' | sed 's/:$//')
 }
 ```
 
@@ -34,10 +34,77 @@ remove the path containing the string
 
 ```bash
 function PATH_REMOVE_CONTAIN() {
-    local DIR=$1
-    export PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/'$DIR'/ {next} {print}' | sed 's/:*$//')
+  local DIR=$1
+  export PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/'$DIR'/ {next} {print}' | sed 's/:*$//')
 }
 ```
+
+### replace ~ with \$HOME in string
+
+work for bash/zsh
+
+```bash
+${PWD/#$HOME/\~}
+```
+
+only work for bash
+
+```bash
+$(cd $HOME/Desktop && dirs +0)
+```
+
+only work for zsh, very trick
+
+```zsh
+$(cd $HOME/Desktop && dirs | awk '{print $1}')
+```
+
+### Get absolute path
+
+in shell
+
+```bash
+alias filepath="python -c 'import os,sys;print os.path.realpath(sys.argv[1])'"
+
+filepath() { for f in "$@"; do echo ${f}(:A); done }
+
+filepath() { echo "$(cd "$(dirname "$1")"; pwd -P)/$(basename "$1")" }
+```
+
+in script
+
+```bash
+base_dir=$(cd "$(dirname "$0")";pwd)
+```
+
+### Copy specific file and keep the folder structure
+
+Ref:
+
+- <https://unix.stackexchange.com/questions/83593/copy-specific-file-type-keeping-the-folder-structure>
+- <https://stackoverflow.com/questions/26259408/rsync-copy-only-specific-files-from-specific-subfolders-without-creating-empty>
+
+Solution 1: use find with cp
+
+```bash
+find . -name '*.csv' -exec cp --parents \{\} /target \;
+```
+
+Solution 2: use rsync
+
+```bash
+rsync -avz --prune-empty-dirs --include '*/' --include '*/*/*.csv' --exclude '*' source/ target/
+```
+
+### Check the Existence of a Command
+
+Ref: <https://www.topbug.net/blog/2016/10/11/speed-test-check-the-existence-of-a-command-in-bash-and-zsh/>
+
+- `type foobar &> /dev/null`
+- `hash foobar &> /dev/null`
+- `command -v foobar &> /dev/null`
+- `which foobar &> /dev/null`
+- `(( $+commands[foobar] ))` (zsh only)
 
 ## Dot
 
@@ -78,4 +145,18 @@ echo {one,two,three,four,five}_dog
 mkdir {2009..2019}_Invoices
 rm frame_{043..61..3}
 touch {blahg,splurg,mmmf}_file.txt
+```
+
+## Curly Braces
+
+Ref: <https://www.linux.com/tutorials/all-about-curly-braces-bash/>
+
+### merge output
+
+```bash
+echo "hello" ; echo "world" > foo.txt
+# only `world` in foo.txt
+
+{echo "hello" ; echo "world"} > foo.txt
+# `helloworld` in foo.txt
 ```

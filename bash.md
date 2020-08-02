@@ -189,6 +189,14 @@ DIR=${SRC%$BASE}  #=> "/path/to/" (dirpath)
 
 ### Comments
 
+Ref: <https://stackoverflow.com/questions/1455988/commenting-in-a-bash-script/1456019#1456019>
+
+```bash
+echo $(: this is a inline comment) foo
+# or
+echo `: this is a inline comment` foo
+```
+
 ```bash
 # Single line comment
 ```
@@ -509,10 +517,14 @@ Dictionaries
 ------------
 {: .-three-column}
 
+Ref: <https://unix.stackexchange.com/questions/111397/associative-arrays-in-shell-scripts>
+
 ### Defining
 
 ```bash
 declare -A sounds
+
+typeset -A foo=([key1]=bar [key2]=baz)
 ```
 
 ```bash
@@ -544,11 +556,11 @@ for val in "${sounds[@]}"; do
 done
 ```
 
-#### Iterate over keys
+#### Iterate over keys with value
 
 ```bash
 for key in "${!sounds[@]}"; do
-  echo $key
+  echo "$key : ${sounds[$key]}"
 done
 ```
 

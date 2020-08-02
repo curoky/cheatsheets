@@ -31,3 +31,41 @@ brew remove --force $(brew list) --ignore-dependencies
 brew cask remove --force $(brew cask list)
 brew cleanup
 ```
+
+## Mirror
+
+### Git mirror
+
+```bash
+# brew
+# BREW_GIT=https://mirrors.aliyun.com/homebrew/brew.git/
+# BREW_GIT=https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
+BREW_GIT=https://mirrors.cloud.tencent.com/homebrew/brew.git/
+git -C "$(brew --repo)" remote set-url origin ${BREW_GIT}
+
+# brew-core
+# BREW_CORE_GIT=https://mirrors.aliyun.com/homebrew/homebrew-core.git
+# BREW_CORE_GIT=https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
+BREW_CORE_GIT=https://mirrors.cloud.tencent.com/homebrew/homebrew-core.git/
+git -C "$(brew --repo homebrew/core)" remote set-url origin ${BREW_CORE_GIT}
+
+# brew-cask
+BREW_CASK_GIT=https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask.git
+git -C "$(brew --repo homebrew/cask)" remote set-url origin ${BREW_CASK_GIT}
+```
+
+unset mirror
+
+```bash
+git -C "$(brew --repo)" remote set-url origin https://github.com/Homebrew/brew.git
+git -C "$(brew --repo homebrew/core)" remote set-url origin https://github.com/Homebrew/homebrew-core
+git -C "$(brew --repo homebrew/cask)" remote set-url origin https://github.com/Homebrew/homebrew-cask
+```
+
+### Bottles mirror
+
+```bash
+# export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.cloud.tencent.com/homebrew-bottles
+# export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+```
