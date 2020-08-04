@@ -20,6 +20,8 @@ find post -type d -exec chmod 644 {} \;
 
 ### Remove file size > 100M
 
+Ref: <https://unix.stackexchange.com/questions/287629/find-and-remove-files-bigger-than-a-specific-size-and-type/287633>
+
 ```bash
 find /path/to -type f -size +100M -delete
 ```
