@@ -116,3 +116,9 @@ git remote rename origin destination
 ```bash
 git remote rm destination
 ```
+
+### Commit with special date
+
+```bash
+gcmsg "init" --date="2020-00-00 00:00:00 +0800"
+```
