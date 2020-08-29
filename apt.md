@@ -13,3 +13,9 @@ Add follow lines to `/etc/apt/apt.conf`
 Acquire::http::Proxy "http://127.0.0.1:1081";
 Acquire::https::Proxy "http://127.0.0.1:1081";
 ```
+
+### Show installed list
+
+```bash
+apt list --installed
+```

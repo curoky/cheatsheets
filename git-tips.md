@@ -47,6 +47,19 @@ Use relative time
 git commit --date="$(date -d "+6 hour" -R)" -m "commit"
 ```
 
+### Change commit date
+
+```bash
+git filter-branch --env-filter \
+    '
+    if [ $GIT_COMMIT = a30999f3b093ac0ff06e892cd691546065953fcb ]
+     then
+         export GIT_AUTHOR_DATE="Sat Dec 7 01:12:23 2019 +0800"
+         export GIT_COMMITTER_DATE="Sat Dec 7 01:12:23 2019 +0800"
+    fi
+    ' --force
+```
+
 ### Keep empty directory
 
 Method 1: Create a empty file which named `.gitkeep`.
