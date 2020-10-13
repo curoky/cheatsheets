@@ -136,3 +136,21 @@ if (APPLE)
     set(THREADS_PREFER_PTHREAD_FLAG ON)
 #endif ()
 ```
+
+### Force minisize static executables
+
+Ref:
+
+- <https://blog.kitware.com/creating-static-executables-on-linux/>
+- <https://stackoverflow.com/questions/15314581/g-compiler-flag-to-minimize-binary-size/15314861#15314861>
+- <https://stackoverflow.com/questions/12390874/how-can-i-reduce-unnecessary-c-library-dependency-introduced-by-cmake/12401734#12401734>
+- <https://wiki.wxwidgets.org/Reducing_Executable_Size>
+- <https://ptspts.blogspot.com/2013/12/how-to-make-smaller-c-and-c-binaries.html>
+
+```cmake
+cmake \
+  -DCMAKE_EXE_LINKER_FLAGS="-static" \
+  -DCMAKE_FIND_LIBRARY_SUFFIXES=".a" \
+  -DCMAKE_BUILD_TYPE=MinSizeRel \
+  -DCMAKE_CXX_FLAGS_MINSIZEREL="-Os -DNDEBUG -s"
+```

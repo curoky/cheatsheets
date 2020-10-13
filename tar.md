@@ -47,3 +47,14 @@ wget -qO- your_link_here | tar xvz -
 wget -qO- your_link_here | tar xvz - -C /target/directory
 wget -qO- your_link_here | tar xvz - -C /target/directory --strip-components 1
 ```
+
+### Split tar file
+
+Ref: <https://www.tecmint.com/split-large-tar-into-multiple-files-of-certain-size/>
+
+```bash
+# split
+split -a 2 -d -b 1G xxx.tar  "xxx.tar." --additional-suffix=".part"
+# merge
+cat xxx.tar.*.part > xxx.joined.tar
+```
