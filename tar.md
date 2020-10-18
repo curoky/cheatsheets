@@ -33,6 +33,7 @@ updated: 2020-07-29
 | tar.Z      | tar -cZvf test.tar.Z file1 file2   | tar -xZvf |
 
 ## Tips
+
 {: .-one-column}
 
 ### From pip
@@ -54,7 +55,11 @@ Ref: <https://www.tecmint.com/split-large-tar-into-multiple-files-of-certain-siz
 
 ```bash
 # split
-split -a 2 -d -b 1G xxx.tar  "xxx.tar." --additional-suffix=".part"
+split -a 2 -d -b 1G --additional-suffix=".part" xxx.tar  "xxx.tar."
+
 # merge
 cat xxx.tar.*.part > xxx.joined.tar
+
+# merge and extract
+cat xxx.tar.*.part | tar -xf - --strip-components 1 -C $HOME
 ```

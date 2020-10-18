@@ -32,3 +32,25 @@ du -hsx * | sort -rh | head -10    # largest 10 folders
 ```bash
 yes | /your/command
 ```
+
+### Run multiple programs in parallel from a bash script?
+
+Ref: <https://stackoverflow.com/questions/3004811/how-do-you-run-multiple-programs-in-parallel-from-a-bash-script>
+
+Method1
+
+```bash
+some_command &
+P1=$!
+other_command &
+P2=$!
+wait $P1 $P2
+```
+
+Method2
+
+```bash
+(echo prog1; echo prog2) | parallel
+# or
+parallel ::: prog1 prog2
+```
